@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>layout</title>
+</head>
+<body>
+<style>
+    .box-sizing-item {
+        display: inline-block;
+        width: 120px;
+        height: 120px;
+        padding: 5px;
+        margin: 5px;
+        border: 5px solid green;
+        background-color: red;
+        vertical-align: middle;
+    }
+
+    .box-sizing-border-box {
+        box-sizing: border-box;
+    }
+
+    .box-sizing-content-box {
+        box-sizing: content-box;
+    }
+
+    .box-sizing-inherit {
+        padding: inherit;
+    }
+
+    .vertical-center-container-1 {
+        width: 300px;
+        height: 60px;
+        margin-bottom: 30px;
+        background-color: red;
+    }
+
+    .vertical-center-content-1 {
+        line-height: 60px;
+    }
+
+    .vertical-center-container-2 {
+        display: table-cell;
+        width: 300px;
+        height: 120px;
+        background-color: red;
+        vertical-align: middle;
+    }
+
+    .vertical-center-content-2 {
+        vertical-align: middle;
+    }
+
+    .vertical-center-container-3 {
+        position: relative;
+        width: 300px;
+        height: 150px;
+        background-color: red;
+        vertical-align: middle;
+        margin-top: 30px;
+    }
+
+    .vertical-center-content-3 {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        top: 50%;
+        left: 0;
+        margin-top: -40px;
+        background-color: green;
+    }
+
+    .vertical-center-container-4 {
+        width: 300px;
+        height: 150px;
+        display: flex;
+        align-items: center;
+        background-color: red;
+        margin-top: 30px;
+    }
+
+    .vertical-center-content-4 {
+        display: inline-block;
+        width: 80px;
+        height: 80px;
+        background-color: green;
+    }
+
+
+    .grail-layout-container{
+        overflow: hidden;
+        padding: 0 200px;
+        margin-top: 30px;
+    }
+
+    .grail-layout-middle{
+        float: left;
+        width: 100%;
+        height: 200px;
+        background-color: red;
+    }
+
+    .grail-layout-left{
+        position: relative;
+        float: left;
+        width: 200px;
+        height: 200px;
+        left: -200px;
+        margin-left: -100%;
+        background-color: green;
+    }
+
+    .grail-layout-right{
+        position: relative;
+        float: left;
+        width: 200px;
+        height: 200px;
+        right: -200px;
+        margin-left: -200px;
+        background-color: blue;
+    }
+
+    .grail-layout-container-2{
+        overflow: hidden;
+        margin: 30px 0;
+    }
+
+    .grail-layout-middle-2{
+        float: left;
+        width: 100%;
+        height: 200px;
+        background-color: red;
+    }
+
+    .grail-layout-middle-inner-2{
+        margin: 0 200px;
+    }
+
+    .grail-layout-left-2{
+        float: left;
+        width: 200px;
+        height: 200px;
+        margin-left: -100%;
+        background-color: green;
+    }
+
+    .grail-layout-right-2{
+        float: left;
+        width: 200px;
+        height: 200px;
+        margin-left: -200px;
+        background-color: blue;
+    }
+</style>
+
+<div class="box-sizing">
+    <span class="box-sizing-item box-sizing-border-box">border-box</span>
+    <span class="box-sizing-item box-sizing-content-box">content-box</span>
+    <span class="box-sizing-item box-sizing-inherit">inherit</span>
+</div>
+
+<div class="vertical-center-container-1">
+    <p class="vertical-center-content-1">单行文本固定容器垂直居中</p>
+</div>
+
+<div class="vertical-center-container-2">
+    <p class="vertical-center-content-2">多行文本固定容器垂直居中，我是多余的、我是多余的</p>
+</div>
+
+<div class="vertical-center-container-3">
+    <div class="vertical-center-content-3">1号</div>
+</div>
+
+<div class="vertical-center-container-4">
+    <div class="vertical-center-content-4">2号</div>
+</div>
+
+<div class="grail-layout-container">
+    <div class="grail-layout-middle">圣杯布局。我是多余的、我是多余的、我是多余的、我是多余的</div>
+    <div class="grail-layout-left"></div>
+    <div class="grail-layout-right"></div>
+</div>
+
+<div class="grail-layout-container-2">
+    <div class="grail-layout-middle-2">
+        <div class="grail-layout-middle-inner-2">圣杯布局2。我是多余的、我是多余的、我是多余的、我是多余的</div>
+    </div>
+    <div class="grail-layout-left-2"></div>
+    <div class="grail-layout-right-2"></div>
+</div>
+</body>
+</html>
