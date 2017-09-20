@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    ul {
+        background-color: red;
+    }
+
+    li {
+        height: 60px;
+        line-height: 60px;
+        background-color: green;
+        border-bottom: 1px solid #000;
+    }
+</style>
+
+<ul>
+    <li>我是一号</li>
+    <li>我是二号</li>
+    <li>我是三号</li>
+    <li>我是四号</li>
+    <li>我是五号</li>
+    <li>我是六号</li>
+</ul>
+
+<script type="text/javascript">
+    //    var list = document.querySelectorAll('li');
+    //    for (var i = 0; i < list.length; i++) {
+    //        (function bindClick(index) {
+    //            list[index].onclick = function (e) {
+    //                console.log(index);
+    //            }
+    //        })(i)
+    //    }
+    document.querySelector('ul').onclick = function (e) {
+        var event = e || window.event;
+        var target = event.target || event.srcElement;
+        if (target.nodeName.toLowerCase() === 'li') {
+            alert(target.innerHTML);
+        }
+    }
+</script>
+
+</body>
+</html>
