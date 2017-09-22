@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+object测试
+</body>
+
+<script type="text/javascript">
+    //    var person1 = new Object({
+    //        name: 'tt',
+    //        age: 50,
+    //        speak: function (text) {
+    //            console.log(this.name + ' speak ' + text);
+    //        }
+    //    });
+    //    person1.speak('ok');
+    //
+    //    var person2 = Object.create(person1);
+    //    console.log(person2);
+
+
+    //    function Person(name, age) {
+    //        this.name = name;
+    //        this.age = age;
+    //        this.speak = function (text) {
+    //            console.log(this.name + ' speak ' + text);
+    //        }
+    //    }
+    //
+    //    Person.prototype.walk = function () {
+    //        console.log(this.name + ' walk');
+    //    };
+    //
+    //    Person.prototype.sleep = function () {
+    //        console.log(this.name + ' sleep');
+    //    };
+    //
+    //    function Kid(name, age) {
+    //        Person.call(this, name, age);
+    //    }
+    //    Kid.prototype = Object.create(Person.prototype);
+    //    Kid.prototype.constructor = Kid;
+    //
+    //    var kid1 = new Kid();
+    //    console.log(kid1);
+    //    var person1 = new Person('tt', 50);
+    //    person1.speak('hello');
+
+    function inheritObject(o) {
+        //临时构造函数
+        function F() {
+        };
+
+        F.prototype = o;
+        return new F();
+    }
+
+    //    var kid1 = {
+    //        name: 'allen',
+    //        hobby: ['basketball','read book']
+    //    }
+
+    //    var kid2 = inheritObject(kid1);
+    //    kid2.hobby.push('football');
+    //    console.log(kid2.hobby);
+    //    console.log(kid1.hobby);
+    //    kid2.name = 'jim';
+    //    console.log(kid2.name);
+    //    console.log(kid1.name);
+
+    //    function createKid(o) {
+    //        var obj = inheritObject(o);
+    //        obj.getName = function () {
+    //            console.log(this.name);
+    //        }
+    //        return obj;
+    //    }
+    //
+    //    var kid2 = createKid(kid1);
+    //    console.log(kid2);
+
+    function inheritPrototype(SubClass, SuperClass) {
+
+        var temp = inheritObject(SuperClass.prototype);
+        temp.constructor = SubClass;
+
+        SubClass.prototype = temp;
+    }
+
+    function Father(name) {
+        this.name = name;
+        this.bag = ['card', 'money'];
+    }
+
+    Father.prototype.getName = function () {
+        console.log(this.name);
+    }
+
+    function Son(name, action) {
+        Father.call(this, name);
+        this.action = action;
+    }
+
+    inheritPrototype(Son,Father);
+
+    Son.prototype.getAction = function () {
+        console.log(this.action);
+    }
+
+    var son1 = new Son('tom','run');
+    var son2 = new Son('marry','jump');
+
+    son1.bag.push('sugar');
+    console.log(son1.bag);
+    console.log(son2.bag);
+
+    son2.getAction();
+    son2.getName();
+
+</script>
+
+</html>
