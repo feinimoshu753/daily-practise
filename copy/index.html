@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+深浅复制
+</body>
+
+<script type="text/javascript">
+
+    var target = {},
+        data = {
+            undefined: undefined,
+            empty: null,
+            empty_string: '',
+            number: 1,
+            string: 'test',
+            boolean: true,
+            object: {
+                number: 2
+            },
+            array: ['a', 'b'],
+            fun: function () {
+                console.log('test');
+            },
+            data: data
+        };
+    var prop = Object.getPrototypeOf(data);
+    prop.prop_number = 5;
+    prop.test = function () {
+        console.log('prop');
+    }
+
+//    for (var key in data) {
+//        target[key] = data[key];
+//        console.log(key);
+//    }
+//        target = Object.assign({},data);
+//        console.log(target);
+
+//    target.number = 2;
+//    console.log(data.number);
+//
+//    target.string = 'copy';
+//    console.log(data.string);
+//
+//    target.object.number = 5;
+//    console.log(data.object.number);
+//
+//    target.array.push('c');
+//    console.log(data.array);
+//
+//    target.fun = function () {
+//        console.log('copy');
+//    }
+//    data.fun();
+//    console.log(target);
+
+        function deepCopy(tar, resource) {
+            for (var key in resource) {
+                var source = resource[key];
+                if (Object.prototype.toString.call(source) === '[object Object]') {
+                    tar[key] = deepCopy(tar[key] || {}, resource[key]);
+                } else if(Object.prototype.toString.call(source) === '[object Array]'){
+                    tar[key] = deepCopy(tar[key] || [], resource[key]);
+                } else if(resource.hasOwnProperty(key)){
+                    tar[key] = resource[key];
+                }
+            }
+            return tar;
+        }
+
+//        target = deepCopy(target, data);
+        target = JSON.parse(JSON.stringify(data));
+        target.number = 2;
+        console.log(data.number);
+
+        target.string = 'copy';
+        console.log(data.string);
+
+        target.object.number = 5;
+        console.log(data.object.number);
+
+        target.array.push('c');
+        console.log(data.array);
+
+        target.fun = function () {
+            console.log('copy');
+        }
+        data.fun();
+        console.log(JSON.stringify(data));
+
+    //    var a = [1,2,3];
+    //    var b = a;
+    //    b.push(4);
+    //    console.log(a);
+    //    var c = {
+    //        data: 1
+    //    }
+    //    var d = c;
+    //    d.data = 5;
+    //    console.log(c);
+</script>
+
+
+</html>
