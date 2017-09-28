@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+函数柯里化
+</body>
+<script type="text/javascript">
+
+    function currying(fn) {
+        if (arguments <= 0) {
+            return;
+        }
+        var args = Array.prototype.slice.call(arguments, 1);
+
+        return function () {
+            var innerArgs = Array.prototype.slice.call(arguments);
+            var totalArgs = args.concat(innerArgs);
+            return fn.apply(null, totalArgs);
+        }
+    }
+
+    function totalFee(price, number) {
+        return price * number;
+    }
+
+    var appleTotalFee = currying(totalFee, 8388);
+    console.log(appleTotalFee(2));
+    var huaWeiTotalFee = currying(totalFee, 3288);
+    console.log(huaWeiTotalFee(5));
+
+    Function.prototype.bind2 = function (context) {
+        var that = this;
+        var args = Array.prototype.slice.call(arguments, 1);
+
+        return function () {
+            return that.apply(context, args);
+        }
+    }
+
+    function curryedBind(fn, context) {
+        var args = Array.prototype.slice.call(arguments, 2);
+
+        return function () {
+            var innerArgs = Array.prototype.slice.call(arguments);
+            var totalArgs = args.concat(innerArgs);
+            return fn.apply(context, totalArgs);
+        }
+    }
+
+    var name = 'limei';
+    var object = {
+        name: 'hanleilei'
+    }
+    function getName(sex) {
+        console.log(this.name + ' is a ' + sex);
+    }
+    getName('girl');
+    var bindFun = curryedBind(getName, object, 'boy');
+    bindFun();
+    var bindFun2 = curryedBind(getName, object);
+    bindFun2('boy');
+</script>
+</html>
