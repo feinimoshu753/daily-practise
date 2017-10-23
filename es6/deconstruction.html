@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>deconstruction</title>
+</head>
+<body>
+deconstruction test
+</body>
+
+<script type="text/javascript">
+
+    let [x, y, z] = [1, 2, 3];
+    console.log(x);
+    console.log(y);
+    console.log(z);
+
+    let [a = 1] = [];
+    console.log(a);
+    let [b = 2] = [undefined];
+    console.log(b);
+    let [c = 3] = [4];
+    console.log(c);
+
+    let [d = 1, e = d] = [5];
+    console.log(d);
+    console.log(e);
+
+    let {football, basketball} = {basketball: "dunk", football: "shoot"};
+    console.log(football);
+    console.log(basketball);
+
+    let {baseball} = {basketball: "dunk", football: "shoot"};
+    console.log(baseball);
+
+    let {football: pingpong} = {basketball: "dunk", football: "shoot"};
+    console.log(pingpong);
+
+    let {f: {g, h}} = {f: {g: 1, h: 2}};
+    console.log(g);
+    console.log(h);
+
+    const [i, j, k] = 'abc';
+    console.log(i);
+    console.log(j);
+    console.log(k);
+
+    let {length: len} = 'kkkkk';
+    console.log(len);
+
+    function arrayTest([a, b, c]) {
+        console.log(a + b + c);
+    }
+    arrayTest([1, 2, 3]);
+
+    function objTest({a, b}) {
+        console.log(a + b);
+    }
+    objTest({a: 1, b: 3});
+</script>
+
+</html>

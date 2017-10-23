@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Promise</title>
+</head>
+<body>
+Promise test
+</body>
+
+<script type="text/javascript">
+
+    let promise = new Promise(function (resolve, reject) {
+        setTimeout(function () {
+            resolve(111);
+        }, 1000);
+        console.log('resolve test');
+    });
+
+    promise.then(function (value) {
+        console.log('success:' + value);
+        return new Promise(function (resolve, reject) {
+            throw new Error('test');
+            console.log('resolve test2');
+        });
+    }).then(function (value) {
+        console.log('promise2:' + value);
+    }).catch(function (error) {
+        console.log('error:' + error);
+    });
+
+</script>
+
+</html>

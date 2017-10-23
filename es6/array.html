@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>array</title>
+</head>
+<body>
+array test
+</body>
+
+<script type="text/javascript">
+    console.log(...['x', 'y', 'z']);
+
+    let a = [];
+    a.push(...[1, 2, 3]);
+    console.log(a);
+
+    function test(x, y) {
+        console.log(x + y);
+    }
+    test(...[1, 2, 3]);
+
+    let b = [1,2,3];
+    let c = [...b];
+    console.log(c);
+
+    console.log([...[1,2],...[3,4],...[5,6]]);
+
+    function fromTest() {
+        console.log(Array.from(arguments));
+    }
+    fromTest('a','b','c');
+
+
+</script>
+</html>

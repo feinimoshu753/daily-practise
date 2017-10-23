@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>object</title>
+</head>
+<body>
+object test
+</body>
+
+<script type="text/javascript">
+    let a = 'simple';
+    let b = {a};
+    console.log(b);
+
+    let obj = {
+        a,
+        fun(){
+            console.log('simple')
+        }
+    }
+    obj.fun();
+
+    let obj1 = {
+        ['a' + 'bc']: 1,
+        d: 2,
+        ['f' + 'un'](){
+            console.log('amazing');
+        }
+    }
+    console.log(obj1.abc);
+    obj1.fun();
+
+    let target = {a: 1, b: 2, c: 3};
+    let source1 = {b: 3, d: 4};
+    let source2 = {c: 4, e: 5};
+    Object.assign(target, source1, source2);
+    console.log(target);
+
+    let obj2 = {a: 1, b: {c: 2}};
+    let obj3 = Object.assign({}, obj2);
+    obj2.a = 2;
+    obj2.b.c = 3;
+    console.log(obj3);
+
+
+</script>
+</html>

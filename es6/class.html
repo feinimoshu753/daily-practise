@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>class</title>
+</head>
+<body>
+class
+</body>
+
+<script type="text/javascript">
+    class A {
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        getValue() {
+            console.log(this.x + this.y);
+        }
+    }
+
+    let a = new A(1, 2);
+    a.getValue();
+    let aa = new A(2, 2);
+    aa.getValue();
+
+    a.x = 5;
+    a.getValue();
+    aa.getValue();
+
+    class B extends A {
+        constructor(x, y) {
+            super(x, y);
+        }
+
+        getOtherValue(){
+            console.log(this.x - this.y);
+        }
+    }
+
+    let b = new B(1,2);
+    b.getValue();
+    b.getOtherValue();
+    console.log(b);
+</script>
+</html>

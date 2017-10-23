@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>symbol</title>
+</head>
+<body>
+symbol test
+</body>
+
+<script type="text/javascript">
+    let a = Symbol('abc');
+    let b = Symbol('abc');
+    console.log(a);
+    console.log(b);
+    console.log(a === b);
+    console.log(a.toString() === b.toString());
+
+    let c = Symbol();
+    let x = {};
+    x[c] = 'xxx';
+    console.log(x[c]);
+</script>
+</html>

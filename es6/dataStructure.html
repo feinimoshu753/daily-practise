@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>data structure</title>
+</head>
+<body>
+data structure
+</body>
+<script type="text/javascript">
+    let a = new Set();
+    [1, 2, 3, 3, 4, 5, 6, 1].forEach(i => a.add(i));
+    console.log(Array.from(a));
+
+    let b = new Map();
+    b.set('a', 1);
+    b.set('b', 2);
+    console.log(b);
+    let c = {a: 1};
+    b.set(c, 3);
+    console.log(b.get(c));
+</script>
+</html>

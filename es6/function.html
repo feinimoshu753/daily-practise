@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>function</title>
+</head>
+<body>
+function test
+</body>
+
+<script type="text/javascript">
+    function defaultValue(x = 0, y = 0) {
+        console.log(x + y);
+    }
+    defaultValue();
+    defaultValue(1);
+    defaultValue(1, 2);
+
+    function restTest(...values) {
+        console.log(values);
+    }
+    restTest(1, 2, 3, 4);
+
+    var arrow = (x, y) => x + y;
+    console.log(arrow(1, 2));
+
+    var arrow2 = () => {
+        a:1
+    };
+    console.log(arrow2());
+
+    var arrow3 = () => ({a: 1});
+    console.log(arrow3());
+
+    var a = 1;
+    function fun() {
+        setTimeout(() => {
+            console.log(this.a);
+        }, 100);
+        setTimeout(function () {
+            console.log(this.a);
+        },100);
+    }
+    fun.call({a: 2});
+</script>
+</html>
