@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>parseInt</title>
+</head>
+<body>
+parseInt test
+</body>
+
+<script type="text/javascript">
+
+    function myParseInt(s, radix) {
+        if (typeof s !== 'number' && typeof s !== 'string') {
+            return NaN;
+        }
+
+        if(radix < 2 || radix > 32){
+            return NaN;
+        }
+
+        var tempString = s + '';
+        var resultByTen = tempString.trim().split('.')[0] * 1;
+
+        return resultByTen;
+
+
+//        var numArray = [];
+//        for (var i = 0; i < tempString.length; i++) {
+//            var char = tempString.charAt(i);
+//
+//            if (char >= 0 && char <= 9) {
+//                numArray.push(char);
+//            } else if (char === '.' && i > 0) {
+//                break;
+//            } else {
+//                return NaN;
+//            }
+//        }
+    }
+    console.log(myParseInt());
+
+</script>
+
+</html>
