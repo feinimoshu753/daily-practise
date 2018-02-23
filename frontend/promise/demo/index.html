@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyPromise test</title>
+    <script src="../promise.js"></script>
+</head>
+<body>
+MyPromise test
+
+<script type="text/javascript">
+    var myPromise = new MyPromise(function (resovle, reject) {
+        resovle(1);
+    });
+    myPromise.then(function (value) {
+        console.warn('a' + value);
+    }).then(function (value) {
+        console.warn('b' + value);
+    });
+</script>
+</body>
+</html>
