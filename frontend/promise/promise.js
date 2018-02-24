@@ -57,4 +57,8 @@ MyPromise.prototype.catch = function (error) {
         this.end = true;
     }
     return this;
-}
+};
+
+MyPromise.all = function () {
+
+};
