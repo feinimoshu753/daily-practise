@@ -49,6 +49,7 @@ MyPromise.prototype.catch = function (error) {
     if(this.end === true){
         return this;
     }
+
     if (this.status === 'pending') {
         typeof error === 'function' && this.errorDeps.push(error);
     } else if (this.status === 'rejected') {
