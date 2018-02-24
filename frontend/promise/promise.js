@@ -1,6 +1,7 @@
 function MyPromise(callback) {
     if (typeof callback !== 'function') {
         console.error(callback + 'is not a function');
+        return;
     }
 
     this.status = 'pending';
@@ -59,6 +60,9 @@ MyPromise.prototype.catch = function (error) {
     return this;
 };
 
-MyPromise.all = function () {
-
+MyPromise.all = function (promises) {
+    if(!Array.isArray(promises)){
+        console.error(promises + 'is not array');
+        return;
+    }
 };
