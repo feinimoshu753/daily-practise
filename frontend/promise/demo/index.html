@@ -10,12 +10,16 @@ MyPromise test
 
 <script type="text/javascript">
     var myPromise = new MyPromise(function (resovle, reject) {
-        resovle(1);
+        setTimeout(function () {
+            reject(5)
+        }, 1000);
     });
     myPromise.then(function (value) {
         console.warn('a' + value);
-    }).then(function (value) {
+    }, function (value) {
         console.warn('b' + value);
+    }).catch(function (value) {
+        console.warn('c' + value);
     });
 </script>
 </body>

@@ -1,7 +1,10 @@
 function MyPromise(callback) {
+    if (!(this instanceof MyPromise)) {
+        throw new Error(this + 'is not a MyPromise');
+    }
+
     if (typeof callback !== 'function') {
-        console.error(callback + 'is not a function');
-        return;
+        throw new Error(callback + 'is not a function');
     }
 
     this.status = 'pending';
@@ -12,7 +15,7 @@ function MyPromise(callback) {
     var resolve = function (value) {
         this.status = 'fulfilled';
         this.value = value;
-        if (this.successDeps.length > 0) {
+        if (this.end === false && this.successDeps.length > 0) {
             this.successDeps[0](value);
             this.end = true;
         }
@@ -20,7 +23,7 @@ function MyPromise(callback) {
     var reject = function (value) {
         this.status = 'rejected';
         this.value = value;
-        if (this.errorDeps.length > 0) {
+        if (this.end === false && this.errorDeps.length > 0) {
             this.errorDeps[0](value);
             this.end = true;
         }
@@ -29,7 +32,7 @@ function MyPromise(callback) {
 }
 
 MyPromise.prototype.then = function (success, error) {
-    if(this.end === true){
+    if (this.end === true) {
         return this;
     }
 
@@ -47,7 +50,7 @@ MyPromise.prototype.then = function (success, error) {
 };
 
 MyPromise.prototype.catch = function (error) {
-    if(this.end === true){
+    if (this.end === true) {
         return this;
     }
 
@@ -61,8 +64,26 @@ MyPromise.prototype.catch = function (error) {
 };
 
 MyPromise.all = function (promises) {
-    if(!Array.isArray(promises)){
+    if (!Array.isArray(promises)) {
         console.error(promises + 'is not array');
         return;
     }
+
+    var values = [];
+    var total = 0;
+    promises.forEach(function (value) {
+        if (value instanceof MyPromise) {
+            value.then(function () {
+                total++;
+            });
+        }
+    });
+
+    return new MyPromise(function (resolve, reject) {
+        if (values.length === total) {
+            resolve(values);
+        } else {
+            reject(values);
+        }
+    })
 };
