@@ -10,6 +10,7 @@ function MyPromise(callback) {
     this.status = 'pending';
     this.successDeps = [];
     this.errorDeps = [];
+    this.finallyDep = '';
     this.value = '';
     this.end = false;
     var resolve = function (value) {
@@ -17,6 +18,7 @@ function MyPromise(callback) {
         this.value = value;
         if (this.end === false && this.successDeps.length > 0) {
             this.successDeps[0](value);
+            this.finallyDep && this.finallyDep();
             this.end = true;
         }
     };
@@ -25,6 +27,7 @@ function MyPromise(callback) {
         this.value = value;
         if (this.end === false && this.errorDeps.length > 0) {
             this.errorDeps[0](value);
+            this.finallyDep && this.finallyDep();
             this.end = true;
         }
     };
@@ -41,9 +44,11 @@ MyPromise.prototype.then = function (success, error) {
         typeof error === 'function' && this.errorDeps.push(error);
     } else if (this.status === 'fulfilled') {
         typeof success === 'function' && success(this.value);
+        this.finallyDep && this.finallyDep();
         this.end = true;
     } else if (this.status === 'rejected') {
         typeof error === 'function' && error(this.value);
+        this.finallyDep && this.finallyDep();
         this.end = true;
     }
     return this;
@@ -58,9 +63,14 @@ MyPromise.prototype.catch = function (error) {
         typeof error === 'function' && this.errorDeps.push(error);
     } else if (this.status === 'rejected') {
         typeof error === 'function' && error(this.value);
+        this.finallyDep && this.finallyDep();
         this.end = true;
     }
     return this;
+};
+
+MyPromise.prototype.finally = function (callback) {
+    this.finallyDep = callback;
 };
 
 MyPromise.all = function (promises) {
@@ -87,3 +97,4 @@ MyPromise.all = function (promises) {
         }
     })
 };
+
