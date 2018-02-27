@@ -98,3 +98,20 @@ MyPromise.all = function (promises) {
     })
 };
 
+MyPromise.resolve = function (obj) {
+
+    if (obj instanceof MyPromise) {
+        return obj;
+    } else if (typeof obj.then === 'function') {
+        return new MyPromise(function (resovle, reject) {
+            obj.then(function (value) {
+                resovle(value);
+            });
+        })
+    } else {
+        return new MyPromise(function (resovle, reject) {
+            resovle(obj);
+        });
+    }
+};
+
