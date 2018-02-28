@@ -83,20 +83,42 @@ MyPromise.all = function (promises) {
     var total = 0;
     promises.forEach(function (value) {
         if (value instanceof MyPromise) {
-            value.then(function () {
+            value.then(function (obj) {
+                values.push(obj);
                 total++;
             });
         }
     });
 
     return new MyPromise(function (resolve, reject) {
-        if (values.length === total) {
+        if (promises.length === total) {
             resolve(values);
         } else {
             reject(values);
         }
     })
 };
+
+MyPromise.race = function (promises) {
+    if (!Array.isArray(promises)) {
+        console.error(promises + 'is not array');
+        return;
+    }
+
+    promises.forEach(function (value) {
+        if (value instanceof MyPromise) {
+            value.then(function (obj) {
+                return new MyPromise(function (resolve, reject) {
+                    resolve(obj);
+                });
+            }).catch(function (e) {
+                return new MyPromise(function (resolve, reject) {
+                    reject(e);
+                });
+            });
+        }
+    });
+}
 
 MyPromise.resolve = function (obj) {
 
@@ -114,4 +136,12 @@ MyPromise.resolve = function (obj) {
         });
     }
 };
+
+MyPromise.reject = function (reason) {
+    return new MyPromise(function (resovle, reject) {
+        reject(reason);
+    });
+};
+
+
 
