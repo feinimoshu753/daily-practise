@@ -14,12 +14,25 @@ MyPromise test
             reject(5)
         }, 1000);
     });
-    myPromise.then(function (value) {
-        console.warn('a' + value);
-    }, function (value) {
-        console.warn('b' + value);
-    }).catch(function (value) {
-        console.warn('c' + value);
+    // myPromise.then(function (value) {
+    //     console.warn('a' + value);
+    // }, function (value) {
+    //     console.warn('b' + value);
+    // }).catch(function (value) {
+    //     console.warn('c' + value);
+    // });
+
+
+    var myPromise2 = new MyPromise(function (resovle, reject) {
+        reject(10);
+    });
+
+    myPromise2.then(function (value) {
+        return myPromise;
+    }).then(function (value) {
+        console.warn(value);
+    }).catch(function (e) {
+        console.warn(e)
     });
 </script>
 </body>
