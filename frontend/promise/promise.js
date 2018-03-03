@@ -17,7 +17,10 @@ function MyPromise(callback) {
         this.status = 'fulfilled';
         this.value = value;
         if (this.end === false && this.successDeps.length > 0) {
-            this.successDeps[0](value);
+            var result = this.successDeps[0](value);
+            if(result instanceof MyPromise){
+                result.then();
+            }
             this.finallyDep && this.finallyDep();
             this.end = true;
         }
