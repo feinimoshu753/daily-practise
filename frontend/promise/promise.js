@@ -18,11 +18,15 @@ function MyPromise(callback) {
         this.value = value;
         if (this.end === false && this.successDeps.length > 0) {
             var result = this.successDeps[0](value);
-            if(result instanceof MyPromise){
-                result.then();
+            if (result instanceof MyPromise) {
+                var that = this;
+                result.then(function (value) {
+                    that.successDeps[1](value);
+                });
+            } else {
+                this.finallyDep && this.finallyDep();
+                this.end = true;
             }
-            this.finallyDep && this.finallyDep();
-            this.end = true;
         }
     };
     var reject = function (value) {

@@ -11,7 +11,7 @@ MyPromise test
 <script type="text/javascript">
     var myPromise = new MyPromise(function (resovle, reject) {
         setTimeout(function () {
-            reject(5)
+            resovle(5)
         }, 1000);
     });
     // myPromise.then(function (value) {
@@ -24,7 +24,9 @@ MyPromise test
 
 
     var myPromise2 = new MyPromise(function (resovle, reject) {
-        reject(10);
+        setTimeout(function () {
+            resovle(10)
+        }, 1000);
     });
 
     myPromise2.then(function (value) {
